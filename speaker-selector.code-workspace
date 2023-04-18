@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "promicro"
+		},
+		{
+			"path": "esp32"
+		}
+	],
+	"settings": {}
+}
