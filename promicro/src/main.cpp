@@ -7,7 +7,7 @@
 #define DEBUG true
 
 // Relays
-const int relays[1] = {15};
+const int relays[8] = {15, 14, 16, 10, 9, 8, 7, 6};
 
 // State
 #define INPUT_A 0
@@ -60,7 +60,11 @@ void handleInputSelection(unsigned int selection)
 		}
 
 		// Set relays status
-		digitalWrite(relays[0], inputSelected == INPUT_A ? LOW : HIGH);
+		for (unsigned int i = 0; i < ARRAY_LENGTH(relays) / 2; i++)
+		{
+			digitalWrite(relays[i], inputSelected == INPUT_A ? LOW : HIGH);
+			digitalWrite(relays[i + 4], inputSelected == INPUT_A ? HIGH : LOW);
+		}
 	}
 }
 
@@ -75,7 +79,7 @@ void setup()
 	button.setDebounceTime(50);
 
 	// Relays
-	for (int i = 0; i < ARRAY_LENGTH(relays); i++)
+	for (unsigned int i = 0; i < ARRAY_LENGTH(relays); i++)
 	{
 		pinMode(relays[i], OUTPUT);
 		digitalWrite(relays[i], HIGH);
@@ -90,6 +94,8 @@ void setup()
 
 	Serial.println("Initialized");
 }
+
+unsigned int selectedRelay = 0;
 
 void loop()
 {
