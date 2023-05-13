@@ -17,14 +17,8 @@ unsigned int inputSelected = -1;
 
 // RF 433Mhz remote controller
 #define RC_SWITCH_PIN 2
-#define BUTTON1_ON_CODE 83029
-#define BUTTON1_OFF_CODE 83028
-#define BUTTON2_ON_CODE 86101
-#define BUTTON2_OFF_CODE 86100
-#define BUTTON3_ON_CODE 70741
-#define BUTTON3_OFF_CODE 70740
-#define BUTTON4_ON_CODE 21589
-#define BUTTON4_OFF_CODE 21588
+#define RC_BUTTON_A 14098482
+#define RC_BUTTON_B 14098484
 RCSwitch mySwitch = RCSwitch();
 
 // Input selection button
@@ -127,11 +121,11 @@ void loop()
 			Serial.println(mySwitch.getReceivedProtocol());
 		}
 
-		if (receivedCode == BUTTON1_ON_CODE)
+		if (receivedCode == RC_BUTTON_A)
 		{
 			handleInputSelection(INPUT_A);
 		}
-		else if (receivedCode == BUTTON2_ON_CODE)
+		else if (receivedCode == RC_BUTTON_B)
 		{
 			handleInputSelection(INPUT_B);
 		}
@@ -141,7 +135,7 @@ void loop()
 			sprintf(buffer, "Don't know how to handle RF code %lu\n", receivedCode);
 			Serial.print(buffer);
 		}
-
+		
 		mySwitch.resetAvailable();
 	}
 }

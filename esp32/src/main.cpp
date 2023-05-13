@@ -182,7 +182,7 @@ void loop()
       Serial.println(mySwitch.getReceivedProtocol());
     }
 
-    if (receivedCode == BUTTON1_ON_CODE)
+    if (receivedCode == RC_BUTTON_A)
     {
       handleInputSelection(INPUT_A);
     }
